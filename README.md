@@ -55,6 +55,7 @@ aws ecr create-repository \
 
 6. Install gh, and enable Git Actions via CLI
 
+## Instal the GH CLI tool
 ```bash
 #Mac
 brew install gh
@@ -64,8 +65,23 @@ curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo 
 sudo apt install gh
 ```
 
+## Enable the GH worflows
 ```bash
 gh workflow
-gh workflow enable workflow
+
+gh workflow list
+#CI  active  13960912
+#CD  active  13960913
+
+gh workflow enable 13960912
+gh workflow enable 13960913
 ```
+
+## Add the GH secrets for the github action
+
+Using the [aws-credentials](https://github.com/aws-actions/configure-aws-credentials) Github action we will authenticate to our AWS account. To do this we have a few options.
+
+- AWS Access-key, and AWS secret-key. (least secure)
+- OIDC short lived IAM role
+
 
