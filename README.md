@@ -50,9 +50,22 @@ Create the ECR repository with the CloudHSM backed Key
 aws ecr create-repository \
     --repository-name con317/app \
     --image-scanning-configuration scanOnPush=true \
-    --encryption-configuration '{"encryptionType":"KMS","kmsKey":"arn:aws:kms:us-west-2:key/19b4a2d3-0319-4afa-8sd9-f398d9saaas0"}}'
+    --encryption-configuration '{"encryptionType":"KMS","kmsKey":"arn:aws:kms:us-west-2:key/19b4a2d3-0319-4afa-8sd9-123456}}'
 ```
 
+6. Install gh, and enable Git Actions via CLI
 
+```bash
+#Mac
+brew install gh
 
+#Linux
+curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo gpg --dearmor -o /usr/share/keyrings/githubcli-archive-keyring.gpg
+sudo apt install gh
+```
+
+```bash
+gh workflow
+gh workflow enable workflow
+```
 
