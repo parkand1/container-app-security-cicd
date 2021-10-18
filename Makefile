@@ -8,6 +8,12 @@ ecr-login:
 
 clean: clean-ecr clean-keys
 
+
+create-ecr:
+	aws ecr create-repository \
+		--repository-name con317/app \
+		--image-scanning-configuration scanOnPush=true
+
 clean-ecr:
 	aws ecr delete-repository \
 		--repository-name con317/app \
