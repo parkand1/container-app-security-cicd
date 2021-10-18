@@ -24,3 +24,11 @@ clean-keys:
 	rm -rf *.key
 	rm -rf *.srl
 
+
+create-cf:
+	aws cloudformation create-stack \
+	--stack-name GithubOIDC \
+	--template-body file://OIDC.yaml \
+	--capabilities CAPABILITY_NAMED_IAM \
+	--region us-west-2 \
+	--parameters ParameterKey=GitHubOrg,ParameterValue=jonahjon ParameterKey=RepositoryName,ParameterValue=container-app-security-cicd ParameterKey=OIDCProviderArn,ParameterValue=github
