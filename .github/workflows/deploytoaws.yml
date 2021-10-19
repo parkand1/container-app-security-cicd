@@ -6,8 +6,8 @@ on:
 name: Scan and CD
 
 jobs:
-  deploy:
-    name: Deploy
+  scan:
+    name: Scan
     runs-on: ubuntu-latest
 
     steps:
@@ -38,6 +38,11 @@ jobs:
       with:
         sarif_file: ${{ steps.sarif-scan.outputs.sarif }}
 
+  deploy:
+    needs: scan
+    name: Deploy
+    runs-on: ubuntu-latest
+    steps:
     - name: Configure AWS credentials
       uses: aws-actions/configure-aws-credentials@v1
       with:
