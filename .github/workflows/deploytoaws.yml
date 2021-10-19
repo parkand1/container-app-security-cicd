@@ -14,6 +14,22 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
 
+    - name: build local container
+      uses: docker/build-push-action@v2
+      with:
+        tags: scannning-image:latest
+        push: false
+        load: true
+
+    - name: sarif-scan
+      id: sarif-scan
+      uses: anchore/scan-action@v3
+      with:
+        image: scannning-image:latest
+        fail-build: true
+        severity-cutoff: critical
+        acs-report-enable: true
+        
     - name: Configure AWS credentials
       uses: aws-actions/configure-aws-credentials@v1
       with:
@@ -65,19 +81,6 @@ jobs:
           then echo "ECR scan results have high or critical vulnerabilities. Cancelling deploy.";
           exit 1;
         fi
-
-    - name: sarif-scan
-      id: sarif-scan
-      env:
-        ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-        ECR_REPOSITORY: con317/app-repo
-        IMAGE_TAG: ${{ github.sha }}
-      uses: anchore/scan-action@v3
-      with:
-        image: $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
-        fail-build: true
-        severity-cutoff: critical
-        acs-report-enable: true
 
     - name: upload Anchore scan SARIF report
       uses: github/codeql-action/upload-sarif@v1
