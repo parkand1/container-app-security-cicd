@@ -3,7 +3,7 @@ on:
     branches:
       - main
 
-name: CD
+name: Scan and CD
 
 jobs:
   deploy:
@@ -26,10 +26,18 @@ jobs:
       uses: anchore/scan-action@v3
       with:
         image: scannning-image:latest
-        fail-build: true
+        fail-build: false
         severity-cutoff: critical
         acs-report-enable: true
-        
+
+    - name: Inspect SARIF report
+      run: cat ${{ steps.scan.outputs.sarif }}
+
+    - name: upload Anchore scan SARIF report
+      uses: github/codeql-action/upload-sarif@v1
+      with:
+        sarif_file: ${{ steps.sarif-scan.outputs.sarif }}
+
     - name: Configure AWS credentials
       uses: aws-actions/configure-aws-credentials@v1
       with:
@@ -81,11 +89,6 @@ jobs:
           then echo "ECR scan results have high or critical vulnerabilities. Cancelling deploy.";
           exit 1;
         fi
-
-    - name: upload Anchore scan SARIF report
-      uses: github/codeql-action/upload-sarif@v1
-      with:
-        sarif_file: ${{ steps.sarif-scan.outputs.sarif }}
 
     - name: Fill in the new image ID in the Amazon ECS task definition
       id: task-def

@@ -1,4 +1,4 @@
-name: "CodeQL"
+name: "Static Code Analysis"
 
 on:
   push:
