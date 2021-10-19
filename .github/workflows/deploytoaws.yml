@@ -14,29 +14,29 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
 
-    - name: build local container
-      uses: docker/build-push-action@v2
-      with:
-        tags: scannning-image:latest
-        push: false
-        load: true
+    # - name: build local container
+    #   uses: docker/build-push-action@v2
+    #   with:
+    #     tags: scannning-image:latest
+    #     push: false
+    #     load: true
 
-    - name: sarif-scan
-      id: sarif-scan
-      uses: anchore/scan-action@v3
-      with:
-        image: scannning-image:latest
-        fail-build: false
-        severity-cutoff: critical
-        acs-report-enable: true
+    # - name: sarif-scan
+    #   id: sarif-scan
+    #   uses: anchore/scan-action@v3
+    #   with:
+    #     image: scannning-image:latest
+    #     fail-build: false
+    #     severity-cutoff: critical
+    #     acs-report-enable: true
 
-    - name: Inspect SARIF report
-      run: cat ${{ steps.sarif-scan.outputs.sarif }}
+    # - name: Inspect SARIF report
+    #   run: cat ${{ steps.sarif-scan.outputs.sarif }}
 
-    - name: upload SARIF report
-      uses: github/codeql-action/upload-sarif@v1
-      with:
-        sarif_file: ${{ steps.sarif-scan.outputs.sarif }}
+    # - name: upload SARIF report
+    #   uses: github/codeql-action/upload-sarif@v1
+    #   with:
+    #     sarif_file: ${{ steps.sarif-scan.outputs.sarif }}
 
   deploy:
     needs: scan
