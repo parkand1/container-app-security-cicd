@@ -1,5 +1,6 @@
 # `Container Application Security - CI/CD Pipeline using AWS for GitHub Actions`
 
+[![CodeQL](https://github.com/jonahjon/container-app-security-cicd/actions/workflows/codeql.yml/badge.svg?branch=main)](https://github.com/jonahjon/container-app-security-cicd/actions/workflows/codeql.yml)
 
 # First time usage
 
