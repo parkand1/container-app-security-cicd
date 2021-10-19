@@ -14,10 +14,12 @@ create-ecr:
 		--repository-name con317/app \
 		--image-scanning-configuration scanOnPush=true
 
-clean-ecr:
+clean:
 	aws ecr delete-repository \
 		--repository-name con317/app \
 		--force
+	aws logs delete-log-group --log-group-name /ecs/con317/app
+
 
 build: ecr-login
 	cd app && docker build -t con317/app .
@@ -30,6 +32,11 @@ clean-keys:
 	rm -rf *.key
 	rm -rf *.srl
 
+loggroup:
+	aws logs create-log-group --log-group-name /ecs/con317/app
+
+task:
+	export $$(xargs <.env) && envsubst < task-definition.json > .aws/task-definition.json
 
 create-cf:
 	aws cloudformation create-stack \
