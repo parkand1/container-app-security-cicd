@@ -3,3 +3,4 @@
 *.srl
 *.csr
 .env
+src/node_modules/

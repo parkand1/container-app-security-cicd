@@ -66,6 +66,24 @@ jobs:
           exit 1;
         fi
 
+    - name: sarif-scan
+      id: sarif-scan
+      env:
+        ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+        ECR_REPOSITORY: con317/app-repo
+        IMAGE_TAG: ${{ github.sha }}
+      uses: anchore/scan-action@v3
+      with:
+        image: "$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG"
+        fail-build: true
+        severity-cutoff: critical
+        acs-report-enable: true
+
+    - name: upload Anchore scan SARIF report
+      uses: github/codeql-action/upload-sarif@v1
+      with:
+        sarif_file: ${{ steps.sarif-scan.outputs.sarif }}
+
     - name: Fill in the new image ID in the Amazon ECS task definition
       id: task-def
       uses: aws-actions/amazon-ecs-render-task-definition@v1
