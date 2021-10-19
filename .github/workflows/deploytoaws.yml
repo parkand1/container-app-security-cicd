@@ -31,9 +31,9 @@ jobs:
         acs-report-enable: true
 
     - name: Inspect SARIF report
-      run: cat ${{ steps.scan.outputs.sarif }}
+      run: cat ${{ steps.sarif-scan.outputs.sarif }}
 
-    - name: upload Anchore scan SARIF report
+    - name: upload SARIF report
       uses: github/codeql-action/upload-sarif@v1
       with:
         sarif_file: ${{ steps.sarif-scan.outputs.sarif }}

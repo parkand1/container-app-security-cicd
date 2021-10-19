@@ -2,6 +2,8 @@
 
 [![CodeQL](https://github.com/jonahjon/container-app-security-cicd/actions/workflows/codeql.yml/badge.svg?branch=main)](https://github.com/jonahjon/container-app-security-cicd/actions/workflows/codeql.yml)
 
+[![Scan and CD](https://github.com/jonahjon/container-app-security-cicd/actions/workflows/deploytoaws.yml/badge.svg)](https://github.com/jonahjon/container-app-security-cicd/actions/workflows/deploytoaws.yml)
+
 # First time usage
 
 1. Create CloudHSM [cluster](https://us-west-2.console.aws.amazon.com/cloudhsm/home?region=us-west-2#/clusters/create) in the cluster which you'll be deploying your application into. (5 minutes)
