@@ -6,8 +6,7 @@ ecr-login:
 	$(eval AWS_ACCOUNT_ID=$(shell aws sts get-caller-identity --query Account --output text))
 	aws ecr get-login-password --region ${AWS_REGION} | docker login --password-stdin --username AWS "$(AWS_ACCOUNT_ID).dkr.ecr.$(AWS_REGION).amazonaws.com"
 
-clean: clean-ecr clean-keys
-
+install: create-ecr loggroup env task
 
 create-ecr:
 	aws ecr create-repository \
@@ -34,6 +33,9 @@ clean-keys:
 
 loggroup:
 	aws logs create-log-group --log-group-name /ecs/con317/app
+
+env:
+	ACCOUNT=$$(aws sts get-caller-identity --query 'Account' --output text) && echo "ACCOUNT_ID=$$ACCOUNT" > .env
 
 task:
 	export $$(xargs <.env) && envsubst < task-definition.json > .aws/task-definition.json
