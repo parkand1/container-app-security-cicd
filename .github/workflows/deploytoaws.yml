@@ -74,7 +74,7 @@ jobs:
         IMAGE_TAG: ${{ github.sha }}
       uses: anchore/scan-action@v3
       with:
-        image: "$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG"
+        image: $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
         fail-build: true
         severity-cutoff: critical
         acs-report-enable: true
