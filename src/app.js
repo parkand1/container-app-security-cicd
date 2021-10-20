@@ -52,7 +52,7 @@ function getHTMLContent() {
 
   let htmlContent = `<head><style>${getCSSString()}</style></head>`;
   htmlContent = htmlContent + '<body>';
-  htmlContent = htmlContent + '<div style="display: inline-block; text-align: center; padding: 20px;"><h1>Greetings from Cluster Sample App!</h1>';
+  htmlContent = htmlContent + '<div style="display: inline-block; text-align: center; padding: 20px;"><h1>Greetings from Reinvent Con317!</h1>';
   htmlContent = htmlContent + `<h3>Today is ${new Date().toLocaleString('en-US', dateLocaleOptions)}`+'</h3>';
   htmlContent = htmlContent + `<p>This web page has been hit ${mainPageHitCounter} time(s)</p>`;
   htmlContent = htmlContent + `<p>The healthcheck of this application has been hit ${healthCheckHitCounter} time(s)</p>`;
