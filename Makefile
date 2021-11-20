@@ -46,4 +46,4 @@ create-cf:
 	--template-body file://OIDC.yaml \
 	--capabilities CAPABILITY_NAMED_IAM \
 	--region us-west-2 \
-	--parameters ParameterKey=GitHubOrg,ParameterValue=jonahjon ParameterKey=RepositoryName,ParameterValue=container-app-security-cicd ParameterKey=OIDCProviderArn,ParameterValue=github
+	--parameters ParameterKey=GitHubOrg,ParameterValue=andrpar ParameterKey=RepositoryName,ParameterValue=container-app-security-cicd ParameterKey=OIDCProviderArn,ParameterValue=github
