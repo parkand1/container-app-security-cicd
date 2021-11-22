@@ -1,7 +1,9 @@
+AWSTemplateFormatVersion: "2010-09-09"
+
 Parameters:
   GitHubOrg:
     Type: String
-  RepositoryName:
+  GitHubRepo:
     Type: String
   OIDCProviderArn:
     Description: Arn for the GitHub OIDC Provider.
@@ -28,7 +30,10 @@ Resources:
                 - !Ref OIDCProviderArn
             Condition:
               StringLike:
-                token.actions.githubusercontent.com:sub: !Sub repo:${GitHubOrg}/${RepositoryName}:*
+                token.actions.githubusercontent.com:sub: !Sub repo:${GitHubOrg}/${GitHubRepo}:*
+      Path: '/'
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/ReadOnlyAccess
 
   GithubOidc:
     Type: AWS::IAM::OIDCProvider
@@ -44,4 +49,3 @@ Outputs:
   Role:
     Value: !GetAtt Role.Arn 
 
-#test 
