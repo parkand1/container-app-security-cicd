@@ -56,6 +56,7 @@ function getHTMLContent() {
   htmlContent = htmlContent + `<h3>Today is ${new Date().toLocaleString('en-US', dateLocaleOptions)}`+'</h3>';
   htmlContent = htmlContent + `<p>This web page has been hit ${mainPageHitCounter} time(s)</p>`;
   htmlContent = htmlContent + `<p>The healthcheck of this application has been hit ${healthCheckHitCounter} time(s)</p>`;
+  htmlContent = htmlContent + `<p>Testing pipeline</p>`;
 
   htmlContent = htmlContent + '<div><p>This app is running in a container having the following IP addresses: ';
   htmlContent = htmlContent + '<table text-align: center; border-style: solid;><th>Name</th><th>Type</th><th>CIDR</th><th>Address</th>';
