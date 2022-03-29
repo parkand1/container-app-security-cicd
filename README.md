@@ -33,4 +33,4 @@ one at a time.
 
 ## Make a new commit to the Repo
 
-If you want to change the badges, then replace `andrpar` with your GH username in the readme badges
+If you want to change the badges, then replace `your GH username` with your GH username in the readme badges
